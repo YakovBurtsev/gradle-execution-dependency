@@ -1,5 +1,6 @@
 task consume {
     doLast {
+        //fixme:
         def message = file("$rootDir/producer/build/generated/some.properties").text
         println("Consuming message: $message")
     }
