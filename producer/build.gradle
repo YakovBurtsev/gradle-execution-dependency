@@ -1,6 +1,18 @@
-task action {
+def generatedResources = "$buildDir/generated"
+
+sourceSets {
+    main {
+        //let's register an output folder on the main SourceSet:
+        output.dir(generatedResources, builtBy: 'generate')
+        //it is now a part of the 'main' classpath and will be a part of the jar
+    }
+}
+
+//a task that generates the resources:
+task generate {
+    outputs.dir generatedResources
     doLast {
-        println "Producing message:"
-        rootProject.producerMessage = 'Watch the order of execution.'
+        def generated = new File(generatedResources, "some.properties")
+        generated.text = "message=Stay happy!"
     }
 }

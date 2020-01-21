@@ -1,6 +1,10 @@
-task action {
-    dependsOn ':producer:action'
+task consume {
     doLast {
-        println("Consuming message: ${rootProject.producerMessage}")
+        def message = file("$rootDir/producer/build/generated/some.properties").text
+        println("Consuming message: $message")
     }
+}
+
+dependencies {
+    runtimeOnly project(':producer')
 }
